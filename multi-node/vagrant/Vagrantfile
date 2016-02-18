@@ -25,7 +25,7 @@ if $worker_vm_memory < 1024
   puts "Workers should have at least 1024 MB of memory"
 end
 
-CONTROLLER_CLUSTER_IP="10.3.0.1"
+CONTROLLER_CLUSTER_IP="10.33.0.1"
 
 ETCD_CLOUD_CONFIG_PATH = File.expand_path("etcd-cloud-config.yaml")
 
@@ -33,15 +33,15 @@ CONTROLLER_CLOUD_CONFIG_PATH = File.expand_path("../generic/controller-install.s
 WORKER_CLOUD_CONFIG_PATH = File.expand_path("../generic/worker-install.sh")
 
 def etcdIP(num)
-  return "172.17.4.#{num+50}"
+  return "172.19.4.#{num+50}"
 end
 
 def controllerIP(num)
-  return "172.17.4.#{num+100}"
+  return "172.19.4.#{num+70}"
 end
 
 def workerIP(num)
-  return "172.17.4.#{num+200}"
+  return "172.19.4.#{num+100}"
 end
 
 controllerIPs = [*1..$controller_count].map{ |i| controllerIP(i) } <<  CONTROLLER_CLUSTER_IP
@@ -97,7 +97,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provider :virtualbox do |vb|
-    vb.cpus = 1
+    vb.cpus = 2
     vb.gui = false
   end
 
