@@ -13,7 +13,9 @@ coreos:
     listen-peer-urls: http://$private_ipv4:2380
 
   units:
-
+  - name: rpc-statd.service
+    command: start
+    enable: true
   - name: etcd2.service
     command: start
 
